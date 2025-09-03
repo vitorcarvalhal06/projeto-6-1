@@ -28,7 +28,12 @@ const Checkout = () => {
   const navigate = useNavigate()
   const { isPayment } = useSelector((state: RootState) => state.cart)
   const dispatch = useDispatch()
-  const [purchase, { data, isSuccess, error }] = usePurchaseMutation()
+  const [purchase, mutationResult] = usePurchaseMutation()
+  const { data, isSuccess, error } = mutationResult as {
+    data?: { orderId: string }
+    isSuccess: boolean
+    error?: any
+  }
 
   const fecharPagamento = () => dispatch(closePayment())
   const fecharPedido = () => dispatch(closeOrder())

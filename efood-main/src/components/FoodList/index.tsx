@@ -27,6 +27,7 @@ export default function FoodList() {
     null
   )
   const { data } = useGetRestauranteQuery(id!)
+  const restauranteData = data as { cardapio: any[] } | undefined
   const dispatch = useDispatch()
 
   const handleAddToCart = () => {
@@ -37,12 +38,12 @@ export default function FoodList() {
     }
   }
 
-  if (!data?.cardapio) return null
+  if (!restauranteData?.cardapio) return null
 
   return (
     <Container>
       <List>
-        {data.cardapio.map((item) => (
+        {restauranteData.cardapio.map((item) => (
           <Food
             key={item.id}
             onClick={() => {

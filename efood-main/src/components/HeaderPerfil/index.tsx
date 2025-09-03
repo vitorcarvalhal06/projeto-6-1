@@ -28,7 +28,10 @@ export default function HeaderPerfil({ tipo, titulo, capa }: Props) {
   const abreCart = () => dispatch(open())
   const { items } = useSelector((state: RootReducer) => state.cart)
 
-  const { data: restaurante } = useGetRestauranteQuery(id!)
+  const { data: restauranteData } = useGetRestauranteQuery(id!)
+  const restaurante = restauranteData as
+    | { capa?: string; tipo?: string; titulo?: string }
+    | undefined
   return (
     <>
       <Imagem style={{ backgroundImage: `url(${fundoImg})` }}>
